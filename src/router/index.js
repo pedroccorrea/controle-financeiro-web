@@ -8,9 +8,11 @@ import GastosDiarios from '../components/GastosDiarios.vue';
 import Cartoes from '../components/Cartoes.vue';
 import Categorias from '../components/Categorias.vue';
 import Extrato from '../components/Extrato.vue';
+import Login from '../components/Login.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
+    { path: '/login', name: 'Home', component: Login },
     { path: '/extrato', name: 'Extrato', component: Extrato },
     { path: '/entradas', name: 'Entradas', component: Entradas },
     { path: '/gastos-recorrentes', name: 'GastosRecorrentes', component: GastosRecorrentes },

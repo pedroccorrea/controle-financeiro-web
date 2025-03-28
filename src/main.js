@@ -6,7 +6,7 @@ import router from './router';
 import store from './store';
 import  { vuexMixins } from './mixins/vueMixins';
 import './style.css';
-import axios from 'axios';
+import api from './services/api';
 import VueApexCharts from 'vue3-apexcharts';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -28,14 +28,8 @@ app.mixin(vuexMixins);
 app.use(store);
 app.use(VueSweetalert2, alertOptions);
 app.use(VueApexCharts);
-app.config.globalProperties.$axios = axios;
 
-axios.interceptors.request.use(
-    config => {
-        config.headers.Accept = 'application/json'
-        return config;
-    }
-)
+app.config.globalProperties.$axios = api;
 
 import Sidebar from './components/Sidebar.vue';
 app.component('sidebar-component', Sidebar);

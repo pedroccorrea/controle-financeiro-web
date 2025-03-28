@@ -10,7 +10,17 @@ export const vuexMixins = {
             transaction: state => state.transaction,
             transactionLoaded: state => state.transactionLoaded
         }),
-        ...mapGetters(['transaction', 'transactionLoaded'])
+        ...mapGetters(['transaction', 'transactionLoaded']),
+
+        ...mapState('auth', {
+            token: state => state.token,
+            user: state => state.user 
+        }),
+        ...mapGetters('auth', ['isAuthenticated']),
+
+        isLoggedIn() {
+            return !!this.token;
+        }, 
     },
     methods: {
         ...mapActions(['handleApiTransaction']),
