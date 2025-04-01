@@ -4,8 +4,8 @@ export default {
     namespaced: true,
 
     state: {
-        // user: JSON.parse(localStorage.getItem('user')) || null,
-        // token: localStorage.getItem('token') || null,
+        user: JSON.parse(localStorage.getItem('user')) || null,
+        token: localStorage.getItem('token') || null,
     },
 
     mutations: {

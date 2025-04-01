@@ -73,8 +73,7 @@ export default {
             const response = await this.login(form);
 
             if (response.success) {
-                console.log('entrou aqui')
-                this.$router.push({ name: 'Home' });
+                this.$router.push({ name: "Home" });
             } else {
                 this.errorMessage = response.message;
             }

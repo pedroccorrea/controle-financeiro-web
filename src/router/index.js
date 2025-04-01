@@ -9,10 +9,11 @@ import Cartoes from '../components/Cartoes.vue';
 import Categorias from '../components/Categorias.vue';
 import Extrato from '../components/Extrato.vue';
 import Login from '../components/Login.vue';
+import store from "@/store";
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
-    { path: '/login', name: 'Home', component: Login },
+    { path: '/login', name: 'Login', component: Login },
     { path: '/extrato', name: 'Extrato', component: Extrato },
     { path: '/entradas', name: 'Entradas', component: Entradas },
     { path: '/gastos-recorrentes', name: 'GastosRecorrentes', component: GastosRecorrentes },
@@ -27,5 +28,18 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = store.getters['auth/isAuthenticated'];
+    const publicPages = ['/login', '/register'];
+    const authRequired = !publicPages.includes(to.path);
+
+    if (authRequired && !isAuthenticated) {
+        return next('/login');
+    }
+
+    next();
+});
+
 
 export default router;
