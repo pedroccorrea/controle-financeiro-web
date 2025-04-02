@@ -19,7 +19,7 @@ export default {
         menuItems: {
             type: Array,
             default: () => [
-                {name: "Dashboard", route: "/"},
+                {name: "Home", route: "/"},
                 {name: "Entradas", route: "/entradas"},
                 {name: "Gastos Diarios", route: "/gastos-diarios"},
                 {name: "Gastos Recorrentes", route: "/gastos-recorrentes"},

@@ -1,7 +1,7 @@
 <template>
     <div style="width:100%;display:flex;justify-content:center;align-items:flex-start;flex-direction: column;padding-bottom: 30px;">
         <div style="width: 100%;font-size: 2em;text-align: left;height:100px;background-color: #30475E;padding:20px;">Olá, Pedro</div>
-        <div style="width: 100%;" @click="this.navigateTo('/extrato')">
+        <div style="width: 100%;" @click="navigateTo('/extrato')">
             <div style="display: flex;align-items: center;justify-content: space-between;width:100%;padding:20px 20px 0 20px;">
                 <span>Saldo em conta</span>
                 <span style="font-size: 1.5em;">></span>
@@ -27,11 +27,6 @@
     </div>
 
 </template>
-<style>
-.main-content {
-    /* padding: 0; */
-}
-</style>
 
 <script>
     export default {
@@ -46,8 +41,8 @@
         }, 
         methods: {
             async buscarDados() {
-                const { data: { data: gastoPorCategoria } } = await this.$axios.get('http://192.168.18.3:8000/api/relatorios/gastos-por-categoria');
-                const { data: { data: gastosPorMes }} = await this.$axios.get('http://192.168.18.3:8000/api/relatorios/gastos-por-mes');
+                const { data: { data: gastoPorCategoria } } = await this.$axios.get('/gastos-por-categoria');
+                const { data: { data: gastosPorMes }} = await this.$axios.get('/gastos-por-mes');
                 
                 this.gastoPorCategoria = gastoPorCategoria;
                 
@@ -55,12 +50,12 @@
                 this.dadosParaGraficoBarras.series = gastosPorMes.map(gasto => parseFloat(gasto.total));
             },
             buscarCategorias(categoria) {
-                let url = `http://192.168.18.3:8000/api/categoria${categoria ? `/${categoria}` : ''}`;
+                let url = `/categoria${categoria ? `/${categoria}` : ''}`;
                 return this.$axios.get(url, { params: {incluir_soma_gastos :true} })
             },
             async processarDadosGraficoPizza() {
                 try {
-                    const pegarGastosRecorrentes = await this.$axios.get(`http://192.168.18.3:8000/api/recorrente`, { params: { por_pagina: 9999} });
+                    const pegarGastosRecorrentes = await this.$axios.get(`/recorrente`, { params: { por_pagina: 9999} });
                     const gastosRecorrentes = pegarGastosRecorrentes.data.data.data;
                     const totalGastosRecorrentes = gastosRecorrentes.reduce(
                         (soma, gasto) => soma + parseFloat(gasto.valor || 0), 0

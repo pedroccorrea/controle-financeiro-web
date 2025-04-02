@@ -29,8 +29,8 @@ api.interceptors.response.use(
         return response;
     },
     (error) => {
-        if ( error.response && error.responst.status == 401 ) {
-            store.commit('auth/logout');
+        if ( error.response && error.response.status == 401 ) {
+            store.commit('auth/clearAuthData');
         }
         return Promise.reject(error);
     }

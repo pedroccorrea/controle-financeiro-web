@@ -53,27 +53,3 @@
         box-shadow: 0 0 5px rgba(98, 97, 204, 0.7) !important;
     }
 </style>
-<!-- <template>
-    <div class="mb-3">
-        <label :for="id" class="form-label" style="float: left;">{{ titulo }}</label>
-        <slot></slot>
-    </div>
-</template>
-
-<script>
-    export default {
-        props: ['id', 'titulo', 'idHelp', 'textoAjuda']
-    }
-</script>
-<style>
-    input {
-        background-color: #4B5365    !important;
-        border: none !important;
-        color: #ccc !important;
-        outline: none !important;
-    }
-
-    input:focus {
-        box-shadow: 0 0 5px rgba(98, 97, 204, 0.7) !important;
-    }
-</style> -->
