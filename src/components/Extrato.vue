@@ -39,7 +39,7 @@
         methods: {
             async buscarExtrato() {
                 try {
-                    const {data: {data: extrato } } = await this.$axios.get('http://192.168.18.3:8000/api/relatorios/extrato');
+                    const {data: {data: extrato } } = await this.$axios.get('/relatorios/extrato');
                     this.extrato = extrato;
                     console.log(this.extrato)
                 } catch (errors) {

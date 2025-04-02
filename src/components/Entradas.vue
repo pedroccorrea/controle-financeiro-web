@@ -64,8 +64,8 @@
         name: 'Entradas',
         data() {
             return {
-                urlBase: 'http://localhost:8000/api/recebimento', 
-                urlPaginacao: 'http://localhost:8000/api/recebimento', 
+                urlBase: '/recebimento', 
+                urlPaginacao: '/recebimento', 
                 entradas : { data: [] },
                 camposFiltro: Object.freeze([
                     // {id: 'por_pagina', tipo: 'number', titulo: 'Por Página', valor: 10, placeholder: 'Exemplo 10'},
@@ -195,7 +195,6 @@
                 });
             }, 
             tratarErros(errors) {
-                console.log(errors);
                 const errorData = errors.response?.data || {
                     success: false,
                     message: 'Erro ao criar registro.',

@@ -50,8 +50,8 @@
         name: 'Categoria',
         data() {
             return {
-                urlBase: 'http://localhost:8000/api/categoria', 
-                urlPaginacao: 'http://localhost:8000/api/categoria', 
+                urlBase: '/categoria', 
+                urlPaginacao: '/categoria', 
                 categorias : { data: [] },
                 params : {},
                 campos: Object.freeze([

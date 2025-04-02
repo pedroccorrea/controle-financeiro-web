@@ -73,8 +73,8 @@
         name: 'Entradas',
         data() {
             return {
-                urlBase: 'http://localhost:8000/api/meta_investimento', 
-                urlPaginacao: 'http://localhost:8000/api/meta_investimento', 
+                urlBase: '/meta_investimento', 
+                urlPaginacao: '/meta_investimento', 
                 windowWidth: window.innerWidth,
                 metas : { data: [] },
                 params: {
@@ -220,7 +220,7 @@
                 this.limparTransaction();
             },
             async salvarContribuicao() {
-                let url = `http://localhost:8000/api/contribuicao_meta`;
+                let url = `/contribuicao_meta`;
                 let form = new FormData();
                 let metaInvestimentoId = this.camposContribuicao[0].meta_investimento_id;
                 let valorContribuicao = this.camposContribuicao[0].valor;

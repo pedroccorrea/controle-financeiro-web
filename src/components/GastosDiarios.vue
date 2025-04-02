@@ -70,8 +70,8 @@
         name: 'Entradas',
         data() {
             return {
-                urlBase: 'http://192.168.18.3:8000/api/gasto_diario', 
-                urlPaginacao: 'http://192.168.18.3:8000/api/gasto_diario', 
+                urlBase: '/gasto_diario', 
+                urlPaginacao: '/gasto_diario', 
                 gastos : { data: [] },
                 dadosParaGrafico: { labels: [], series: [] },
                 categorias: [],
@@ -211,7 +211,7 @@
 
             }, 
             carregarCartoes() {
-                let url = 'http://192.168.18.3:8000/api/cartao';
+                let url = '/cartao';
                 this.$axios.get(url)
                     .then(response => {
                         const options = response.data.data.map(cartao => ({
@@ -222,7 +222,7 @@
                     })
             },
             buscarCategorias(categoria) {
-                let url = `http://192.168.18.3:8000/api/categoria${categoria ? `/${categoria}` : ''}`;
+                let url = `/categoria${categoria ? `/${categoria}` : ''}`;
                 return this.$axios.get(url, { params: {incluir_soma_gastos :true} })
             },
             async carregarCategorias() {
@@ -258,7 +258,7 @@
                 });
                 
                 if(resource.transacao_cartao_id) {
-                    let url = `http://192.168.18.3:8000/api/transacao_cartao/${resource.transacao_cartao_id}`;
+                    let url = `/transacao_cartao/${resource.transacao_cartao_id}`;
                     try {
                         const { data: {data: transacao }} = await this.$axios.get(url);
                         this.atualizarCampo('cartao', transacao.cartao_id);
@@ -275,7 +275,7 @@
                 if(campo) campo.valor = valor;
             },
             async salvar() {
-                let urlTransacao = 'http://192.168.18.3:8000/api/transacao_cartao';
+                let urlTransacao = '/transacao_cartao';
                 let urlGasto = this.urlBase;
                 let tipo = this.item.find(campo => campo.id === 'tipo').valor;
                 const dadosTransacao = {
@@ -346,7 +346,7 @@
             }, 
             async processarDadosGrafico() {
                 try {
-                    const pegarGastosRecorrentes = await this.$axios.get(`http://192.168.18.3:8000/api/recorrente`, { params: { por_pagina: 9999} });
+                    const pegarGastosRecorrentes = await this.$axios.get(`/recorrente`, { params: { por_pagina: 9999} });
                     const gastosRecorrentes = pegarGastosRecorrentes.data.data.data;
                     const totalGastosRecorrentes = gastosRecorrentes.reduce(
                         (soma, gasto) => soma + parseFloat(gasto.valor || 0), 0

@@ -65,8 +65,8 @@
         name: 'Entradas',
         data() {
             return {
-                urlBase: 'http://localhost:8000/api/recorrente', 
-                urlPaginacao: 'http://localhost:8000/api/recorrente', 
+                urlBase: '/recorrente', 
+                urlPaginacao: '/recorrente', 
                 gastos : { data: [] },
                 camposFiltro: Object.freeze([
                     // {id: 'por_pagina', tipo: 'number', titulo: 'Por Página', valor: 10, placeholder: 'Exemplo 10'},

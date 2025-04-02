@@ -41,8 +41,8 @@
         }, 
         methods: {
             async buscarDados() {
-                const { data: { data: gastoPorCategoria } } = await this.$axios.get('/gastos-por-categoria');
-                const { data: { data: gastosPorMes }} = await this.$axios.get('/gastos-por-mes');
+                const { data: { data: gastoPorCategoria } } = await this.$axios.get('/relatorios/gastos-por-categoria');
+                const { data: { data: gastosPorMes }} = await this.$axios.get('/relatorios/gastos-por-mes');
                 
                 this.gastoPorCategoria = gastoPorCategoria;
                 

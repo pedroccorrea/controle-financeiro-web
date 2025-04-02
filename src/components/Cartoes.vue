@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <card-component titulo="Relação de Entradas">
+        <card-component titulo="Relação de Cartões">
             <template v-slot:conteudo>
                 <table-component 
                     :visualizar="{visivel: false, dataToggle:'modal', dataTarget:'#modalVisualizar'}"
@@ -51,8 +51,8 @@
         name: 'Entradas',
         data() {
             return {
-                urlBase: 'http://localhost:8000/api/cartao', 
-                urlPaginacao: 'http://localhost:8000/api/cartao', 
+                urlBase: '/cartao', 
+                urlPaginacao: '/cartao', 
                 cartoes : { data: [] },
                 campos: Object.freeze([
                     {
