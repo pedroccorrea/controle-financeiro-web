@@ -21,11 +21,6 @@
         </card-component>
     </div>
 </template>
-<style>
-.main-content {
-    /* padding: 0; */
-}
-</style>
 
 <script>
     export default {
@@ -41,7 +36,6 @@
                 try {
                     const {data: {data: extrato } } = await this.$axios.get('/relatorios/extrato');
                     this.extrato = extrato;
-                    console.log(this.extrato)
                 } catch (errors) {
                     console.log(errors);
                 }

@@ -166,7 +166,7 @@
             }, 
             remover() {
                 this.$swal({
-                    title: 'Você tem certeza que deseja excluir essa entrada?',
+                    title: 'Você tem certeza que deseja excluir este cartão?',
                     text: 'Essa ação não pode ser desfeita!',
                     icon: 'warning',
                     showCancelButton: true,
@@ -174,7 +174,7 @@
                     cancelButtonText: 'Cancelar',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        let url = `${this.urlBase}/${this.item.id}`;
+                        let url = `${this.urlBase}/${this.item[0].id}`;
                         let form = new FormData();
                         form.append('_method', 'DELETE');
 
