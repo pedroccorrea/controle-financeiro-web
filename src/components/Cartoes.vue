@@ -135,34 +135,33 @@
                 })
                 this.item.id=resource.id
             }, 
-            salvar() {
-                let url = this.urlBase;
-                let form = new FormData();
-                if(this.item.id) {
-                    url+=`/${this.item.id}`;
-                    form.append('_method', 'PATCH');
+            async salvar() {
+                try {
+                    let url = this.urlBase;
+                    let form = new FormData();
+                    if(this.item.id) {
+                        url+=`/${this.item.id}`;
+                        form.append('_method', 'PATCH');
+                    }
+                    form.append('user_id', 1);
+                    this.item.forEach(campo => {
+                        form.append(campo.id, campo.valor);
+                    })
+
+                    const { data } = await this.$axios.post(url, form);
+
+                    this.setTransaction(data);
+                    this.setTransactionLoaded(true);
+                    this.carregarLista();
+                } catch (error) {
+                    const errorData = error.response?.data || {
+                        success: false,
+                        message: 'Erro ao criar registro.',
+                        errors: ['Erro desconhecido.'],
+                    }
+                    this.setTransaction(errorData);
+                    this.setTransactionLoaded(true);
                 }
-                form.append('user_id', 1);
-                this.item.forEach(campo => {
-                    form.append(campo.id, campo.valor);
-                })
-                this.$axios.post(url, form)
-                    .then(response => {
-                        console.log(response)
-                        this.setTransaction(response.data);
-                        this.setTransactionLoaded(true);
-                        this.carregarLista();
-                    })
-                    .catch(errors => {
-                        console.log('errors',errors)
-                        const errorData = errors.response?.data || {
-                            success: false,
-                            message: 'Erro ao criar registro.',
-                            errors: ['Erro desconhecido.'],
-                        }
-                        this.setTransaction(errorData);
-                        this.setTransactionLoaded(true);
-                    })
             }, 
             remover() {
                 this.$swal({
@@ -172,20 +171,21 @@
                     showCancelButton: true,
                     confirmButtonText: 'Sim, excluir!',
                     cancelButtonText: 'Cancelar',
-                }).then((result) => {
+                }).then(async (result) => {
                     if (result.isConfirmed) {
-                        let url = `${this.urlBase}/${this.item[0].id}`;
-                        let form = new FormData();
-                        form.append('_method', 'DELETE');
+                        try {
+                            let url = `${this.urlBase}/${this.item[0].id}`;
+                            let form = new FormData();
+                            form.append('_method', 'DELETE');
 
-                        this.$axios.post(url, form)
-                            .then(response => {
-                                this.$swal('Excluído!', response.data.message, 'success');
-                                this.carregarLista();
-                            })
-                            .catch(errors => {
-                                console.log('erro', errors);
-                            })
+                            const { data: { message } } = await this.$axios.post(url, form)
+
+                            this.$swal('Excluído!',message, 'success');
+                            
+                            this.carregarLista();
+                        } catch (error) {
+                            console.log('erro', error);
+                        }
                     }
                 });
             }
